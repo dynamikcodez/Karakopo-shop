@@ -96,6 +96,12 @@ if (empty(getenv('LOG_CHANNEL')) || empty($_ENV['LOG_CHANNEL'])) {
     $_SERVER['LOG_CHANNEL'] = 'stderr';
 }
 
+if (empty(getenv('APP_MAINTENANCE_DRIVER')) || empty($_ENV['APP_MAINTENANCE_DRIVER'])) {
+    putenv('APP_MAINTENANCE_DRIVER=array');
+    $_ENV['APP_MAINTENANCE_DRIVER'] = 'array';
+    $_SERVER['APP_MAINTENANCE_DRIVER'] = 'array';
+}
+
 // 5. Ensure relative storage symlink exists
 $publicStorage = __DIR__ . '/../public/storage';
 if (!file_exists($publicStorage) && !is_link($publicStorage)) {
@@ -111,6 +117,12 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 // Direct ALL Laravel storage writes to /tmp/storage
 $app->useStoragePath('/tmp/storage');
 
+// Bind in-memory maintenance mode for serverless (avoids any Manager::createDriver calls)
+$app->singleton(
+    \Illuminate\Contracts\Foundation\MaintenanceMode::class,
+    fn () => new \Illuminate\Foundation\ArrayMaintenanceMode()
+);
+
 // Enforce non-empty runtime drivers during boot
 $app->booting(function () {
     if (empty(config('session.driver'))) {
@@ -118,6 +130,12 @@ $app->booting(function () {
     }
     if (empty(config('cache.default'))) {
         config(['cache.default' => 'array']);
+    }
+    if (empty(config('app.maintenance.driver'))) {
+        config(['app.maintenance.driver' => 'array']);
+    }
+    if (empty(config('hashing.driver'))) {
+        config(['hashing.driver' => 'bcrypt']);
     }
     if (empty(config('app.key'))) {
         config(['app.key' => 'base64:RbgQHxDfHYfmFuPJuat5kuulqHtJWDShMiirxVZKbKo=']);
