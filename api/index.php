@@ -78,19 +78,19 @@ if ($connection === 'sqlite') {
 }
 
 // 4. Serverless defaults
-if (empty(getenv('SESSION_DRIVER')) && empty($_ENV['SESSION_DRIVER'])) {
+if (empty(getenv('SESSION_DRIVER')) || empty($_ENV['SESSION_DRIVER'])) {
     putenv('SESSION_DRIVER=cookie');
     $_ENV['SESSION_DRIVER'] = 'cookie';
     $_SERVER['SESSION_DRIVER'] = 'cookie';
 }
 
-if (empty(getenv('CACHE_STORE')) && empty($_ENV['CACHE_STORE'])) {
+if (empty(getenv('CACHE_STORE')) || empty($_ENV['CACHE_STORE'])) {
     putenv('CACHE_STORE=array');
     $_ENV['CACHE_STORE'] = 'array';
     $_SERVER['CACHE_STORE'] = 'array';
 }
 
-if (empty(getenv('LOG_CHANNEL')) && empty($_ENV['LOG_CHANNEL'])) {
+if (empty(getenv('LOG_CHANNEL')) || empty($_ENV['LOG_CHANNEL'])) {
     putenv('LOG_CHANNEL=stderr');
     $_ENV['LOG_CHANNEL'] = 'stderr';
     $_SERVER['LOG_CHANNEL'] = 'stderr';
@@ -110,6 +110,25 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 
 // Direct ALL Laravel storage writes to /tmp/storage
 $app->useStoragePath('/tmp/storage');
+
+// Enforce non-empty runtime drivers during boot
+$app->booting(function () {
+    if (empty(config('session.driver'))) {
+        config(['session.driver' => 'cookie']);
+    }
+    if (empty(config('cache.default'))) {
+        config(['cache.default' => 'array']);
+    }
+    if (empty(config('app.key'))) {
+        config(['app.key' => 'base64:RbgQHxDfHYfmFuPJuat5kuulqHtJWDShMiirxVZKbKo=']);
+    }
+    if (empty(config('database.default'))) {
+        config(['database.default' => 'sqlite']);
+    }
+    if (config('database.default') === 'sqlite' && empty(config('database.connections.sqlite.database'))) {
+        config(['database.connections.sqlite.database' => '/tmp/database.sqlite']);
+    }
+});
 
 // 7. Handle request with diagnostic error catching
 try {
