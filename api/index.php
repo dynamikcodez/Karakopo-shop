@@ -68,8 +68,12 @@ $connection = getenv('DB_CONNECTION') ?: ($_ENV['DB_CONNECTION'] ?? 'sqlite');
 if ($connection === 'sqlite') {
     $tmpDb = '/tmp/database.sqlite';
     $seedDb = __DIR__ . '/../database/database.sqlite';
-    if (!file_exists($tmpDb) && file_exists($seedDb)) {
-        @copy($seedDb, $tmpDb);
+    if (!file_exists($tmpDb)) {
+        if (file_exists($seedDb) && filesize($seedDb) > 0) {
+            @copy($seedDb, $tmpDb);
+        } else {
+            @touch($tmpDb);
+        }
         @chmod($tmpDb, 0666);
     }
     putenv("DB_DATABASE={$tmpDb}");
@@ -143,7 +147,7 @@ $app->booting(function () {
     if (empty(config('database.default'))) {
         config(['database.default' => 'sqlite']);
     }
-    if (config('database.default') === 'sqlite' && empty(config('database.connections.sqlite.database'))) {
+    if (config('database.default') === 'sqlite') {
         config(['database.connections.sqlite.database' => '/tmp/database.sqlite']);
     }
 });
