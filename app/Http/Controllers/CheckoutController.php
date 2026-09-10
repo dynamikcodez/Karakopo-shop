@@ -14,7 +14,6 @@ class CheckoutController extends Controller
 {
     protected $paymentGateway;
 
-    // Injecting the interface so we can swap it out later if needed
     public function __construct(PaymentGatewayInterface $paymentGateway)
     {
         $this->paymentGateway = $paymentGateway;
@@ -36,7 +35,10 @@ class CheckoutController extends Controller
         $deliveryFee = 3000;
         $total = $subtotal + $deliveryFee;
 
-        return view('checkout', compact('cart', 'subtotal', 'deliveryFee', 'total'));
+        $bank = config('services.bank');
+        $whatsappNumber = config('services.whatsapp.number');
+
+        return view('checkout', compact('cart', 'subtotal', 'deliveryFee', 'total', 'bank', 'whatsappNumber'));
     }
 
     public function store(Request $request)
@@ -54,6 +56,7 @@ class CheckoutController extends Controller
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
             'delivery_instructions' => 'nullable|string',
+            'payment_method' => 'nullable|string|in:whatsapp,online',
         ]);
 
         $subtotal = 0;
@@ -66,21 +69,27 @@ class CheckoutController extends Controller
         DB::beginTransaction();
 
         try {
-            $order = Order::create(array_merge($validated, [
+            $order = Order::create([
                 'user_id' => auth()->id(),
                 'order_number' => 'ORD-' . strtoupper(Str::random(8)),
+                'customer_name' => $validated['customer_name'],
+                'customer_email' => $validated['customer_email'],
+                'customer_phone' => $validated['customer_phone'],
+                'delivery_address' => $validated['delivery_address'],
+                'city' => $validated['city'],
+                'state' => $validated['state'],
+                'delivery_instructions' => $validated['delivery_instructions'] ?? null,
                 'subtotal' => $subtotal,
                 'delivery_fee' => $deliveryFee,
                 'total' => $total,
                 'payment_status' => 'Pending',
                 'order_status' => 'Pending',
-            ]));
+            ]);
 
             foreach ($cart as $productId => $item) {
-                // Ensure stock is available
                 $product = Product::lockForUpdate()->findOrFail($productId);
                 if ($product->stock < $item['quantity']) {
-                    throw new \Exception("Product {$product->name} is out of stock.");
+                    throw new \Exception("Product {$product->name} does not have enough stock.");
                 }
 
                 $order->items()->create([
@@ -92,18 +101,17 @@ class CheckoutController extends Controller
                 ]);
             }
 
-            // Note: We don't reduce inventory here. We reduce it AFTER successful payment verification.
-
             DB::commit();
 
-            // Initialize payment
-            $paymentUrl = $this->paymentGateway->initialize($order);
+            // Clear shopping cart after creating the order
+            session()->forget('cart');
 
-            return redirect()->away($paymentUrl);
+            // Default & primary flow: WhatsApp payment & order confirmation
+            return redirect()->route('checkout.success', $order->order_number);
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return back()->with('error', 'Checkout failed: ' . $e->getMessage());
+            return back()->with('error', 'Checkout failed: ' . $e->getMessage())->withInput();
         }
     }
 
@@ -143,7 +151,6 @@ class CheckoutController extends Controller
                         'status' => 'Success'
                     ]);
 
-                    // Reduce stock
                     foreach ($order->items as $item) {
                         if ($item->product_id) {
                             Product::where('id', $item->product_id)->decrement('stock', $item->quantity);
@@ -151,9 +158,7 @@ class CheckoutController extends Controller
                     }
                 });
 
-                // Clear cart
                 session()->forget('cart');
-
                 return redirect()->route('checkout.success', $order->order_number);
             }
 
@@ -167,12 +172,36 @@ class CheckoutController extends Controller
 
     public function success($order_number)
     {
-        $order = Order::with('items')->where('order_number', $order_number)->firstOrFail();
+        $order = Order::with(['items.product'])->where('order_number', $order_number)->firstOrFail();
         
-        if ($order->payment_status !== 'Paid') {
-            return redirect()->route('home');
+        $whatsappNumber = preg_replace('/[^0-9]/', '', config('services.whatsapp.number', '2348126215642'));
+        $bank = config('services.bank');
+
+        // Build structured WhatsApp order message
+        $whatsappMessage = "Hello Karakopo! 🛍️\n"
+                         . "I just placed an order on the website:\n\n"
+                         . "📋 *Order Number:* " . $order->order_number . "\n"
+                         . "👤 *Customer Name:* " . $order->customer_name . "\n"
+                         . "📞 *Phone:* " . $order->customer_phone . "\n"
+                         . "📍 *Delivery Address:* " . $order->delivery_address . ", " . $order->city . ", " . $order->state . "\n\n"
+                         . "🛒 *Items Ordered:*\n";
+
+        foreach ($order->items as $item) {
+            $whatsappMessage .= "• " . $item->name . " (x" . $item->quantity . ") - ₦" . number_format($item->total, 2) . "\n";
         }
 
-        return view('checkout-success', compact('order'));
+        $whatsappMessage .= "\n💵 *Subtotal:* ₦" . number_format($order->subtotal, 2) . "\n"
+                         . "🚚 *Delivery Fee:* ₦" . number_format($order->delivery_fee, 2) . "\n"
+                         . "💰 *Total Amount:* ₦" . number_format($order->total, 2) . "\n";
+
+        if ($order->delivery_instructions) {
+            $whatsappMessage .= "📝 *Delivery Note:* " . $order->delivery_instructions . "\n";
+        }
+
+        $whatsappMessage .= "\nPlease confirm availability and let me know payment transfer instructions. Thank you!";
+
+        $whatsappUrl = "https://wa.me/" . $whatsappNumber . "?text=" . urlencode($whatsappMessage);
+
+        return view('checkout-success', compact('order', 'whatsappUrl', 'whatsappMessage', 'bank', 'whatsappNumber'));
     }
 }

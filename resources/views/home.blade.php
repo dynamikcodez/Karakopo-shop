@@ -8,11 +8,11 @@
             <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                 <div class="sm:text-center lg:text-left pt-12">
                     <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                        <span class="block xl:inline">Smart Abundance.</span>
                         <span class="block text-maroon">Spend less. Buy more.</span>
                     </h1>
                     <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                        Curated household utilities and premium gift items tailored for Nigerian homes. Find quality, functionality, and elegance all in one place.
+                        Curated household Items, premium gift items and souvenirs.<br>
+                        Here you will find quality, functionality, and elegance all in one place.
                     </p>
                     <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                         <div class="rounded-md shadow">
@@ -26,10 +26,8 @@
         </div>
     </div>
     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 bg-cream flex items-center justify-center">
-        <!-- Placeholder for beautiful hero image -->
-        <div class="w-full h-64 sm:h-72 md:h-96 lg:h-full bg-gradient-to-br from-[#FFF6E9] to-[#f5e3cc] flex items-center justify-center">
-            <span class="text-maroon opacity-50 text-2xl font-bold">Karakopo Home Essentials</span>
-        </div>
+        <!-- Hero image -->
+        <img class="w-full h-64 sm:h-72 md:h-96 lg:h-full object-cover" src="https://images.unsplash.com/photo-1584984164101-70ee5fec7db3?q=80&w=2070&auto=format&fit=crop" alt="Warm household items">
     </div>
 </div>
 
@@ -65,6 +63,32 @@
             @foreach($featuredProducts as $product)
                 @include('partials.product-card', ['product' => $product])
             @endforeach
+            <!-- Placeholder 1 -->
+            <a href="#" class="group block relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                <div class="aspect-square bg-gray-100 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" alt="Premium Ceramic Dinner Set">
+                    <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">SALE</div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 mb-1 group-hover:text-maroon transition-colors">Premium Ceramic Dinner Set (16 Pieces)</h3>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-lg font-bold text-gray-900">₦28,500.00</span>
+                        <span class="text-sm text-gray-400 line-through">₦35,000.00</span>
+                    </div>
+                </div>
+            </a>
+            <!-- Placeholder 2 -->
+            <a href="#" class="group block relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+                <div class="aspect-square bg-gray-100 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" alt="Handwoven Rattan Storage Basket">
+                </div>
+                <div class="p-4">
+                    <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 mb-1 group-hover:text-maroon transition-colors">Handwoven Rattan Storage Basket</h3>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-lg font-bold text-gray-900">₦12,000.00</span>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
 </div>
@@ -88,6 +112,32 @@
         @foreach($popularProducts as $product)
             @include('partials.product-card', ['product' => $product])
         @endforeach
+        <!-- Placeholder 1 -->
+        <a href="#" class="group block relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+            <div class="aspect-square bg-gray-100 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1596205216652-520f92b7eb1a?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" alt="Premium Bamboo Cutting Board Set">
+            </div>
+            <div class="p-4">
+                <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 mb-1 group-hover:text-maroon transition-colors">Premium Bamboo Cutting Board Set</h3>
+                <div class="flex items-center space-x-2">
+                    <span class="text-lg font-bold text-gray-900">₦15,000.00</span>
+                </div>
+            </div>
+        </a>
+        <!-- Placeholder 2 -->
+        <a href="#" class="group block relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
+            <div class="aspect-square bg-gray-100 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1512149177596-f817c7ef5d4c?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" alt="Modern Minimalist Ceramic Vase">
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">SALE</div>
+            </div>
+            <div class="p-4">
+                <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 mb-1 group-hover:text-maroon transition-colors">Modern Minimalist Ceramic Vase</h3>
+                <div class="flex items-center space-x-2">
+                    <span class="text-lg font-bold text-gray-900">₦8,500.00</span>
+                    <span class="text-sm text-gray-400 line-through">₦12,000.00</span>
+                </div>
+            </div>
+        </a>
     </div>
 </div>
 @endsection

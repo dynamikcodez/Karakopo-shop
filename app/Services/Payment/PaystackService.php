@@ -17,6 +17,14 @@ class PaystackService implements PaymentGatewayInterface
 
     public function initialize(Order $order): string
     {
+        // Development testing fallback if Paystack secret key is not yet set in .env
+        if (empty($this->secretKey)) {
+            return route('checkout.verify', [
+                'reference' => $order->order_number,
+                'mock' => '1',
+            ]);
+        }
+
         $response = Http::withToken($this->secretKey)
             ->post($this->baseUrl . '/transaction/initialize', [
                 'email' => $order->customer_email,
@@ -37,6 +45,11 @@ class PaystackService implements PaymentGatewayInterface
 
     public function verify(string $reference): bool
     {
+        // Development testing fallback if Paystack secret key is not yet set in .env
+        if (empty($this->secretKey) && request('mock') === '1') {
+            return true;
+        }
+
         $response = Http::withToken($this->secretKey)
             ->get($this->baseUrl . '/transaction/verify/' . $reference);
 

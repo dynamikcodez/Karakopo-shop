@@ -20,6 +20,8 @@ class DashboardController extends Controller
             'low_stock' => Product::where('stock', '<=', 5)->count(),
         ];
 
-        return view('admin.dashboard', compact('stats'));
+        $recentOrders = Order::with('items')->latest()->take(5)->get();
+
+        return view('admin.dashboard', compact('stats', 'recentOrders'));
     }
 }

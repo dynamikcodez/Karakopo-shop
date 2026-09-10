@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
         ], [
             'category_id' => $kitchenCat->id,
             'name' => 'Premium Ceramic Dining Plates (Set of 4)',
+            'slug' => 'premium-ceramic-dining-plates-set-of-4',
             'short_description' => 'Sleek, modern premium ceramic plates set.',
             'description' => 'Elevate your dining experience with this beautiful set of 4 premium ceramic plates. Hand-finished with a minimalist warm tone perfect for the modern Nigerian home. Microwave and dishwasher safe.',
             'price' => 25000,
@@ -72,6 +73,7 @@ class DatabaseSeeder extends Seeder
         ], [
             'category_id' => $kitchenCat->id,
             'name' => 'Luxury Bamboo Cutting Board',
+            'slug' => 'luxury-bamboo-cutting-board',
             'short_description' => 'High-end, durable bamboo cutting board.',
             'description' => 'A heavy-duty, high-end bamboo cutting board that is as beautiful as it is functional. Naturally antibacterial and easy on your knives. A must-have for any serious kitchen.',
             'price' => 15000,

@@ -40,4 +40,16 @@ return [
         'secret_key' => env('PAYSTACK_SECRET_KEY'),
     ],
 
+    'whatsapp' => [
+        'number' => env('WHATSAPP_NUMBER', '2348126215642'),
+    ],
+
+    'bank' => [
+        'name' => env('BANK_NAME', 'OPay'),
+        'account_number' => env('BANK_ACCOUNT_NUMBER', '8135631609'),
+        'account_name' => env('BANK_ACCOUNT_NAME', 'Karakopo Retail'),
+    ],
+
 ];
+
+

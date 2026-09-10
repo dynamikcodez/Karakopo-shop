@@ -3,7 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
+        "build": "vite build && (mkdir -p dist || true)",
+        "vercel-build": "vite build && (mkdir -p dist || true)",
         "dev": "vite"
     },
     "devDependencies": {
