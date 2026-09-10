@@ -2,14 +2,15 @@
 
 /**
  * Vercel Serverless Function Entry Point for Karakopo
- *
- * Directs incoming serverless requests through Laravel's public entry point
- * while configuring ephemeral /tmp storage and runtime paths.
  */
+
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
+
+define('LARAVEL_START', microtime(true));
 
 // 1. Ensure required /tmp directories exist for Laravel's read-only filesystem environment
 $tmpDirs = [
-    '/tmp/views',
     '/tmp/storage',
     '/tmp/storage/framework',
     '/tmp/storage/framework/views',
@@ -19,6 +20,8 @@ $tmpDirs = [
     '/tmp/storage/logs',
     '/tmp/storage/app',
     '/tmp/storage/app/public',
+    '/tmp/storage/bootstrap',
+    '/tmp/storage/bootstrap/cache',
 ];
 
 foreach ($tmpDirs as $dir) {
@@ -32,25 +35,25 @@ putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 $_SERVER['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 
-putenv('APP_CONFIG_CACHE=/tmp/config.php');
-$_ENV['APP_CONFIG_CACHE'] = '/tmp/config.php';
-$_SERVER['APP_CONFIG_CACHE'] = '/tmp/config.php';
+putenv('APP_CONFIG_CACHE=/tmp/storage/bootstrap/cache/config.php');
+$_ENV['APP_CONFIG_CACHE'] = '/tmp/storage/bootstrap/cache/config.php';
+$_SERVER['APP_CONFIG_CACHE'] = '/tmp/storage/bootstrap/cache/config.php';
 
-putenv('APP_EVENTS_CACHE=/tmp/events.php');
-$_ENV['APP_EVENTS_CACHE'] = '/tmp/events.php';
-$_SERVER['APP_EVENTS_CACHE'] = '/tmp/events.php';
+putenv('APP_EVENTS_CACHE=/tmp/storage/bootstrap/cache/events.php');
+$_ENV['APP_EVENTS_CACHE'] = '/tmp/storage/bootstrap/cache/events.php';
+$_SERVER['APP_EVENTS_CACHE'] = '/tmp/storage/bootstrap/cache/events.php';
 
-putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
-$_ENV['APP_PACKAGES_CACHE'] = '/tmp/packages.php';
-$_SERVER['APP_PACKAGES_CACHE'] = '/tmp/packages.php';
+putenv('APP_PACKAGES_CACHE=/tmp/storage/bootstrap/cache/packages.php');
+$_ENV['APP_PACKAGES_CACHE'] = '/tmp/storage/bootstrap/cache/packages.php';
+$_SERVER['APP_PACKAGES_CACHE'] = '/tmp/storage/bootstrap/cache/packages.php';
 
-putenv('APP_ROUTES_CACHE=/tmp/routes.php');
-$_ENV['APP_ROUTES_CACHE'] = '/tmp/routes.php';
-$_SERVER['APP_ROUTES_CACHE'] = '/tmp/routes.php';
+putenv('APP_ROUTES_CACHE=/tmp/storage/bootstrap/cache/routes.php');
+$_ENV['APP_ROUTES_CACHE'] = '/tmp/storage/bootstrap/cache/routes.php';
+$_SERVER['APP_ROUTES_CACHE'] = '/tmp/storage/bootstrap/cache/routes.php';
 
-putenv('APP_SERVICES_CACHE=/tmp/services.php');
-$_ENV['APP_SERVICES_CACHE'] = '/tmp/services.php';
-$_SERVER['APP_SERVICES_CACHE'] = '/tmp/services.php';
+putenv('APP_SERVICES_CACHE=/tmp/storage/bootstrap/cache/services.php');
+$_ENV['APP_SERVICES_CACHE'] = '/tmp/storage/bootstrap/cache/services.php';
+$_SERVER['APP_SERVICES_CACHE'] = '/tmp/storage/bootstrap/cache/services.php';
 
 // Safe default encryption key if not configured in Vercel environment
 if (empty(getenv('APP_KEY')) && empty($_ENV['APP_KEY'])) {
@@ -61,20 +64,20 @@ if (empty(getenv('APP_KEY')) && empty($_ENV['APP_KEY'])) {
 }
 
 // 3. Database initialization for SQLite on serverless
-// If using SQLite (default) and no external database URL is provided:
 $connection = getenv('DB_CONNECTION') ?: ($_ENV['DB_CONNECTION'] ?? 'sqlite');
 if ($connection === 'sqlite') {
     $tmpDb = '/tmp/database.sqlite';
     $seedDb = __DIR__ . '/../database/database.sqlite';
     if (!file_exists($tmpDb) && file_exists($seedDb)) {
         @copy($seedDb, $tmpDb);
+        @chmod($tmpDb, 0666);
     }
     putenv("DB_DATABASE={$tmpDb}");
     $_ENV['DB_DATABASE'] = $tmpDb;
     $_SERVER['DB_DATABASE'] = $tmpDb;
 }
 
-// 4. Set serverless-compatible defaults for sessions, caching, and logs
+// 4. Serverless defaults
 if (empty(getenv('SESSION_DRIVER')) && empty($_ENV['SESSION_DRIVER'])) {
     putenv('SESSION_DRIVER=cookie');
     $_ENV['SESSION_DRIVER'] = 'cookie';
@@ -99,5 +102,23 @@ if (!file_exists($publicStorage) && !is_link($publicStorage)) {
     @symlink('../storage/app/public', $publicStorage);
 }
 
-// 6. Delegate request execution to Laravel's public/index.php
-require __DIR__ . '/../public/index.php';
+// 6. Bootstrap Laravel and bind writable storage path
+require __DIR__ . '/../vendor/autoload.php';
+
+/** @var Application $app */
+$app = require_once __DIR__ . '/../bootstrap/app.php';
+
+// Direct ALL Laravel storage writes to /tmp/storage
+$app->useStoragePath('/tmp/storage');
+
+// 7. Handle request with diagnostic error catching
+try {
+    $app->handleRequest(Request::capture());
+} catch (\Throwable $e) {
+    error_log("SERVER ERROR: " . $e->getMessage() . "\n" . $e->getTraceAsString());
+    http_response_code(500);
+    echo "<h1>Karakopo Server Error</h1>";
+    echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
+    echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . " (Line " . $e->getLine() . ")</p>";
+    echo "<pre style='background:#f4f4f4;padding:12px;border-radius:6px;overflow:auto;'>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
+}
