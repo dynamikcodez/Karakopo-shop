@@ -64,22 +64,34 @@ if (empty(getenv('APP_KEY')) && empty($_ENV['APP_KEY'])) {
 }
 
 // 3. Database initialization for SQLite on serverless
-$connection = getenv('DB_CONNECTION') ?: ($_ENV['DB_CONNECTION'] ?? 'sqlite');
-if ($connection === 'sqlite') {
-    $tmpDb = '/tmp/database.sqlite';
-    $seedDb = __DIR__ . '/../database/database.sqlite';
-    if (!file_exists($tmpDb)) {
-        if (file_exists($seedDb) && filesize($seedDb) > 0) {
-            @copy($seedDb, $tmpDb);
-        } else {
-            @touch($tmpDb);
-        }
-        @chmod($tmpDb, 0666);
+$tmpDb = '/tmp/database.sqlite';
+$candidateSeedDbs = [
+    __DIR__ . '/../database/database.sqlite',
+    dirname(__DIR__) . '/database/database.sqlite',
+    '/var/task/database/database.sqlite',
+    '/var/task/user/database/database.sqlite',
+];
+
+$seedDb = null;
+foreach ($candidateSeedDbs as $candidate) {
+    if (file_exists($candidate) && filesize($candidate) > 0) {
+        $seedDb = $candidate;
+        break;
     }
-    putenv("DB_DATABASE={$tmpDb}");
-    $_ENV['DB_DATABASE'] = $tmpDb;
-    $_SERVER['DB_DATABASE'] = $tmpDb;
 }
+
+if (!file_exists($tmpDb) || filesize($tmpDb) === 0) {
+    if ($seedDb) {
+        @copy($seedDb, $tmpDb);
+    } else {
+        @touch($tmpDb);
+    }
+    @chmod($tmpDb, 0666);
+}
+
+putenv("DB_DATABASE={$tmpDb}");
+$_ENV['DB_DATABASE'] = $tmpDb;
+$_SERVER['DB_DATABASE'] = $tmpDb;
 
 // 4. Serverless defaults
 if (empty(getenv('SESSION_DRIVER')) || empty($_ENV['SESSION_DRIVER'])) {
@@ -144,11 +156,26 @@ $app->booting(function () {
     if (empty(config('app.key'))) {
         config(['app.key' => 'base64:RbgQHxDfHYfmFuPJuat5kuulqHtJWDShMiirxVZKbKo=']);
     }
-    if (empty(config('database.default'))) {
-        config(['database.default' => 'sqlite']);
-    }
-    if (config('database.default') === 'sqlite') {
-        config(['database.connections.sqlite.database' => '/tmp/database.sqlite']);
+    $tmpDb = '/tmp/database.sqlite';
+    $dbConn = config('database.default', 'sqlite');
+    if ($dbConn === 'sqlite' || empty($dbConn)) {
+        config([
+            'database.default' => 'sqlite',
+            'database.connections.sqlite.database' => $tmpDb,
+        ]);
+
+        if (!file_exists($tmpDb) || filesize($tmpDb) < 1000) {
+            try {
+                if (!file_exists($tmpDb)) {
+                    @touch($tmpDb);
+                    @chmod($tmpDb, 0666);
+                }
+                \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+                \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+            } catch (\Throwable $migErr) {
+                error_log("Database auto-migration warning: " . $migErr->getMessage());
+            }
+        }
     }
 });
 
