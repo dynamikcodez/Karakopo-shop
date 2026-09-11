@@ -24,6 +24,9 @@
                 <span class="font-extrabold text-lg tracking-tight">Karakopo <span class="text-xs font-normal opacity-80 uppercase bg-white/20 px-1.5 py-0.5 rounded">Admin</span></span>
             </div>
             <div class="flex items-center space-x-2">
+                <button type="button" onclick="openOnboardingModal()" class="text-xs bg-white/20 hover:bg-white/30 text-white px-2.5 py-1.5 rounded-lg transition-colors font-medium">
+                    🎓 Guide
+                </button>
                 <a href="{{ route('home') }}" class="text-xs bg-white/20 hover:bg-white/30 text-white px-2.5 py-1.5 rounded-lg transition-colors" title="View Store">
                     🏪 Store
                 </a>
@@ -78,13 +81,34 @@
                     @endif
                 </a>
 
-                <div class="pt-4 mt-4 border-t border-white/10 space-y-1.5">
+                <div class="pt-3 mt-3 border-t border-white/10 space-y-1.5">
+                    <button type="button" onclick="openOnboardingModal()" class="w-full flex items-center px-4 py-2.5 rounded-xl text-xs font-semibold text-amber-200 hover:bg-white/10 hover:text-white transition-colors text-left">
+                        <svg class="w-4 h-4 mr-3 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        🎓 Admin Guide & Tour
+                    </button>
                     <a href="{{ route('home') }}" target="_blank" class="flex items-center px-4 py-2.5 rounded-xl text-xs font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-colors">
                         <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                         View Public Storefront ↗
                     </a>
                 </div>
             </nav>
+
+            <!-- Developer Support Card in Sidebar -->
+            <div class="px-4 py-3 border-t border-white/10 bg-black/20 text-xs">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-300">🛠️ Developer Support</span>
+                    <span class="inline-block w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                </div>
+                <p class="text-[11px] text-white/80 font-medium leading-tight">+234 703 229 3819</p>
+                <div class="mt-2 flex items-center justify-between gap-1.5">
+                    <a href="https://wa.me/2347032293819?text=Hello%20Developer,%20I%20am%20contacting%20you%20from%20Karakopo%20Admin" target="_blank" class="flex-1 py-1.5 px-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-[11px] text-center transition-colors shadow">
+                        WhatsApp
+                    </a>
+                    <a href="tel:+2347032293819" class="py-1.5 px-2.5 bg-white/20 hover:bg-white/30 text-white rounded-lg font-bold text-[11px] text-center transition-colors" title="Call +2347032293819">
+                        📞 Call
+                    </a>
+                </div>
+            </div>
 
             <!-- Bottom User & Logout -->
             <div class="p-4 border-t border-white/10 bg-black/10">
@@ -110,7 +134,11 @@
                 <div>
                     <h2 class="text-xl font-bold text-gray-900 tracking-tight">@yield('title')</h2>
                 </div>
-                <div class="flex items-center space-x-4">
+                <div class="flex items-center space-x-3">
+                    <button type="button" onclick="openOnboardingModal()" class="inline-flex items-center text-xs font-bold px-3.5 py-1.5 rounded-lg bg-amber-50 border border-amber-300 text-amber-900 hover:bg-amber-100 transition-colors shadow-sm">
+                        <span class="mr-1.5">🎓</span>
+                        Admin Guide & Tour
+                    </button>
                     <a href="{{ route('home') }}" target="_blank" class="inline-flex items-center text-xs font-semibold px-3 py-1.5 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors">
                         <svg class="w-3.5 h-3.5 mr-1.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                         View Store
@@ -156,6 +184,9 @@
             </div>
         </main>
     </div>
+
+    <!-- Admin Onboarding Modal -->
+    @include('admin.partials.onboarding-modal')
 
     <!-- Toast Notification Container for Admin -->
     <div id="admin-toast" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>

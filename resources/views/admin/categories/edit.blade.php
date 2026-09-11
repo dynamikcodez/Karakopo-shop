@@ -18,7 +18,7 @@
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700">Image</label>
             @if($category->image)
-                <div class="mb-2"><img src="{{ asset('storage/' . $category->image) }}" class="h-20 w-20 object-cover rounded"></div>
+                <div class="mb-2"><img src="{{ $category->image_url }}" onerror="this.onerror=null;this.src='{{ asset('images/logo.png') }}';" class="h-20 w-20 object-cover rounded"></div>
             @endif
             <input type="file" name="image" class="mt-1 block w-full">
         </div>

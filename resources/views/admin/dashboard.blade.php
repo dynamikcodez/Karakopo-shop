@@ -11,6 +11,10 @@
             <p class="text-xs sm:text-sm text-white/80 mt-1">Manage products, monitor sales, and generate promo captions for marketing.</p>
         </div>
         <div class="flex flex-wrap gap-2.5">
+            <button type="button" onclick="openOnboardingModal()" class="inline-flex items-center px-4 py-2 bg-amber-400 hover:bg-amber-300 text-maroon text-xs sm:text-sm font-extrabold rounded-xl shadow transition-colors">
+                <span class="mr-1.5">🎓</span>
+                Admin Onboarding Guide
+            </button>
             <a href="{{ route('admin.products.create') }}" class="inline-flex items-center px-4 py-2 bg-white text-maroon text-xs sm:text-sm font-bold rounded-xl hover:bg-gray-100 shadow transition-colors">
                 <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 Add New Product
@@ -130,6 +134,49 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <!-- Developer & Technical Support Card -->
+    <div class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl shadow-sm border border-gray-700/50 p-6 sm:p-7 overflow-hidden relative">
+        <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div class="space-y-2 max-w-xl">
+                <div class="flex items-center space-x-2">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-amber-400 text-maroon shadow-sm">
+                        🛠️ Developer & Technical Support
+                    </span>
+                    <span class="inline-flex items-center text-xs text-green-400 font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-green-400 mr-1.5 animate-pulse"></span>
+                        Available for assistance
+                    </span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">Need technical help, fixes, or custom features?</h3>
+                <p class="text-xs sm:text-sm text-gray-300">
+                    If you encounter any server issues, have questions about your Vercel deployment, or wish to add new payment methods or features, contact your software developer directly.
+                </p>
+                <div class="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-gray-400">
+                    <div>📞 Phone: <strong class="text-white">+234 703 229 3819</strong></div>
+                    <div>🏦 Store Bank: <strong class="text-white">OPay (8135631609)</strong></div>
+                    <div>💬 Store Line: <strong class="text-white">+234 812 621 5642</strong></div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row lg:flex-col gap-2.5 w-full sm:w-auto flex-shrink-0">
+                <a href="https://wa.me/2347032293819?text=Hello%20Developer,%20I%20am%20contacting%20you%20from%20the%20Karakopo%20Admin%20Dashboard%20regarding..." target="_blank" class="inline-flex items-center justify-center px-5 py-3 rounded-xl text-xs sm:text-sm font-bold bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20 transition-all">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    Chat on WhatsApp
+                </a>
+                <a href="tel:+2347032293819" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all">
+                    <svg class="w-4 h-4 mr-2 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    Direct Phone Call
+                </a>
+                <button type="button" onclick="navigator.clipboard.writeText('+2347032293819'); window.showToast('Developer number (+2347032293819) copied!');" class="inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
+                    📋 Copy Developer Number
+                </button>
+            </div>
+        </div>
+
+        <!-- Decorative background glow -->
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-maroon/30 rounded-full blur-3xl pointer-events-none"></div>
     </div>
 </div>
 @endsection

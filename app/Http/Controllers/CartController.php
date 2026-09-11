@@ -52,7 +52,7 @@ class CartController extends Controller
                 'name' => $product->name,
                 'quantity' => $request->quantity,
                 'price' => $price,
-                'image' => $product->primaryImage ? $product->primaryImage->image_path : null
+                'image' => $product->image_url
             ];
         }
 

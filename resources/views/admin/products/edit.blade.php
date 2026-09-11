@@ -106,7 +106,7 @@
                     <div class="flex flex-wrap gap-3">
                         @foreach($product->images as $image)
                             <div class="relative w-24 h-24 rounded-xl overflow-hidden border border-gray-200 shadow-sm">
-                                <img src="{{ asset('storage/' . $image->image_path) }}" class="w-full h-full object-cover">
+                                <img src="{{ $image->url }}" onerror="this.onerror=null;this.src='{{ asset('images/logo.png') }}';" class="w-full h-full object-cover">
                                 @if($image->is_primary)
                                     <span class="absolute bottom-1 left-1 bg-black/70 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">Primary</span>
                                 @endif

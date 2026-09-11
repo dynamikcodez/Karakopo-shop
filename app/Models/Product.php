@@ -13,6 +13,8 @@ class Product extends Model
         'description', 'price', 'sale_price', 'stock', 'is_featured', 'is_published'
     ];
 
+    protected $appends = ['image_url'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -26,5 +28,18 @@ class Product extends Model
     public function primaryImage()
     {
         return $this->hasOne(ProductImage::class)->where('is_primary', true);
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        $primary = $this->primaryImage 
+            ?? $this->images()->where('is_primary', true)->first() 
+            ?? $this->images()->first();
+
+        if ($primary) {
+            return $primary->url;
+        }
+
+        return asset('images/logo.png');
     }
 }

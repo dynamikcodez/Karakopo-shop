@@ -37,13 +37,10 @@
     <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
         @foreach($categories as $category)
         <a href="{{ route('shop', ['category' => $category->slug]) }}" class="group block relative rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white aspect-[4/3]">
-            @if($category->image)
-                <img src="{{ asset('storage/' . $category->image) }}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300">
-            @else
-                <div class="w-full h-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                    <span class="text-gray-400">No Image</span>
-                </div>
-            @endif
+            <img src="{{ $category->image_url }}" 
+                 onerror="this.onerror=null; this.src='{{ asset('images/logo.png') }}';" 
+                 class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                 alt="{{ $category->name }}">
             <div class="absolute inset-0 bg-black bg-opacity-20 flex items-end p-4">
                 <h3 class="text-white font-bold text-lg drop-shadow-md">{{ $category->name }}</h3>
             </div>
@@ -63,32 +60,6 @@
             @foreach($featuredProducts as $product)
                 @include('partials.product-card', ['product' => $product])
             @endforeach
-            <!-- Placeholder 1 -->
-            <a href="#" class="group block relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-                <div class="aspect-square bg-gray-100 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" alt="Premium Ceramic Dinner Set">
-                    <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">SALE</div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 mb-1 group-hover:text-maroon transition-colors">Premium Ceramic Dinner Set (16 Pieces)</h3>
-                    <div class="flex items-center space-x-2">
-                        <span class="text-lg font-bold text-gray-900">₦28,500.00</span>
-                        <span class="text-sm text-gray-400 line-through">₦35,000.00</span>
-                    </div>
-                </div>
-            </a>
-            <!-- Placeholder 2 -->
-            <a href="#" class="group block relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-                <div class="aspect-square bg-gray-100 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" alt="Handwoven Rattan Storage Basket">
-                </div>
-                <div class="p-4">
-                    <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 mb-1 group-hover:text-maroon transition-colors">Handwoven Rattan Storage Basket</h3>
-                    <div class="flex items-center space-x-2">
-                        <span class="text-lg font-bold text-gray-900">₦12,000.00</span>
-                    </div>
-                </div>
-            </a>
         </div>
     </div>
 </div>
@@ -112,32 +83,6 @@
         @foreach($popularProducts as $product)
             @include('partials.product-card', ['product' => $product])
         @endforeach
-        <!-- Placeholder 1 -->
-        <a href="#" class="group block relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-            <div class="aspect-square bg-gray-100 relative overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1596205216652-520f92b7eb1a?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" alt="Premium Bamboo Cutting Board Set">
-            </div>
-            <div class="p-4">
-                <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 mb-1 group-hover:text-maroon transition-colors">Premium Bamboo Cutting Board Set</h3>
-                <div class="flex items-center space-x-2">
-                    <span class="text-lg font-bold text-gray-900">₦15,000.00</span>
-                </div>
-            </div>
-        </a>
-        <!-- Placeholder 2 -->
-        <a href="#" class="group block relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow">
-            <div class="aspect-square bg-gray-100 relative overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1512149177596-f817c7ef5d4c?q=80&w=1000&auto=format&fit=crop" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" alt="Modern Minimalist Ceramic Vase">
-                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">SALE</div>
-            </div>
-            <div class="p-4">
-                <h3 class="text-sm font-semibold text-gray-800 line-clamp-2 mb-1 group-hover:text-maroon transition-colors">Modern Minimalist Ceramic Vase</h3>
-                <div class="flex items-center space-x-2">
-                    <span class="text-lg font-bold text-gray-900">₦8,500.00</span>
-                    <span class="text-sm text-gray-400 line-through">₦12,000.00</span>
-                </div>
-            </div>
-        </a>
     </div>
 </div>
 @endsection

@@ -3,8 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build && (mkdir -p dist || true)",
-        "vercel-build": "vite build && (mkdir -p dist || true)",
+        "build": "vite build && (mkdir -p dist || true) && (mkdir -p public/storage && cp -rn storage/app/public/* public/storage/ 2>/dev/null || true)",
+        "vercel-build": "vite build && (mkdir -p dist || true) && (mkdir -p public/storage && cp -rn storage/app/public/* public/storage/ 2>/dev/null || true)",
         "dev": "vite"
     },
     "devDependencies": {
