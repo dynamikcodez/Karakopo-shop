@@ -139,7 +139,7 @@
             <!-- Add to Cart Form -->
             <div class="mt-6">
                 @if($product->stock > 0)
-                    <form action="{{ route('cart.add') }}" method="POST" class="flex flex-col sm:flex-row gap-3">
+                    <form action="{{ route('cart.add', [], false) }}" method="POST" class="flex flex-col sm:flex-row gap-3">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                         

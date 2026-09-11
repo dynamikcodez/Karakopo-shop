@@ -45,7 +45,7 @@
 
     <!-- Add to Cart / View Button -->
     <div class="px-3 sm:px-4 pb-3 sm:pb-4 pt-0">
-        <form action="{{ route('cart.add') }}" method="POST">
+        <form action="{{ route('cart.add', [], false) }}" method="POST">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="hidden" name="quantity" value="1">

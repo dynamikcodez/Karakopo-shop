@@ -94,6 +94,9 @@ $_ENV['DB_DATABASE'] = $tmpDb;
 $_SERVER['DB_DATABASE'] = $tmpDb;
 
 // 4. Serverless defaults
+$_SERVER['HTTPS'] = 'on';
+$_SERVER['SERVER_PORT'] = '443';
+
 if (empty(getenv('SESSION_DRIVER')) || empty($_ENV['SESSION_DRIVER'])) {
     putenv('SESSION_DRIVER=cookie');
     $_ENV['SESSION_DRIVER'] = 'cookie';

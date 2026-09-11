@@ -34,7 +34,7 @@
 
                             <!-- Quantity and Action Controls -->
                             <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto space-x-4 pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
-                                <form action="{{ route('cart.update') }}" method="POST" class="flex items-center space-x-2">
+                                <form action="{{ route('cart.update', [], false) }}" method="POST" class="flex items-center space-x-2">
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name="product_id" value="{{ $id }}">
@@ -45,7 +45,7 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('cart.remove') }}" method="POST">
+                                <form action="{{ route('cart.remove', [], false) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="product_id" value="{{ $id }}">

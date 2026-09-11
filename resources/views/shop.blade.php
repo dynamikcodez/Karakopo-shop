@@ -28,7 +28,7 @@
         <!-- Desktop Sidebar Filters / Mobile Dropdown -->
         <aside class="w-full md:w-64 flex-shrink-0">
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                <form action="{{ route('shop') }}" method="GET" id="filter-form">
+                <form action="{{ route('shop', [], false) }}" method="GET" id="filter-form">
                     <!-- Search Input -->
                     <div class="mb-5">
                         <label for="search-input" class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Search</label>

@@ -11,7 +11,7 @@
 </div>
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-    <form action="{{ route('checkout.store') }}" method="POST" class="lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start space-y-8 lg:space-y-0">
+    <form action="{{ route('checkout.store', [], false) }}" method="POST" class="lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start space-y-8 lg:space-y-0">
         @csrf
         
         <!-- Left Column: Delivery Details & Payment Method -->
