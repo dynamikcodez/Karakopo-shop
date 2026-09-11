@@ -45,6 +45,8 @@
     "APP_URL": "https://karakopo-shop.vercel.app",
     "ASSET_URL": "https://karakopo-shop.vercel.app",
     "BCRYPT_ROUNDS": "12",
-    "HASH_DRIVER": "bcrypt"
+    "HASH_DRIVER": "bcrypt",
+    "SESSION_LIFETIME": "120",
+    "SESSION_COOKIE": "karakopo_session"
   }
 }

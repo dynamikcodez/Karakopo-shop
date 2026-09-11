@@ -32,7 +32,7 @@ return [
     |
     */
 
-    'lifetime' => (int) env('SESSION_LIFETIME', 120),
+    'lifetime' => ((int) env('SESSION_LIFETIME', 120)) > 0 ? (int) env('SESSION_LIFETIME', 120) : 120,
 
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
 
@@ -127,10 +127,7 @@ return [
     |
     */
 
-    'cookie' => env(
-        'SESSION_COOKIE',
-        Str::slug((string) env('APP_NAME', 'laravel')).'-session'
-    ),
+    'cookie' => env('SESSION_COOKIE') ?: 'karakopo_session',
 
     /*
     |--------------------------------------------------------------------------
@@ -156,7 +153,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN'),
+    'domain' => (env('SESSION_DOMAIN') && env('SESSION_DOMAIN') !== 'null') ? env('SESSION_DOMAIN') : null,
 
     /*
     |--------------------------------------------------------------------------

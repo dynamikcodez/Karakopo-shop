@@ -101,11 +101,17 @@ $_SERVER['DB_DATABASE'] = $tmpDb;
 $_SERVER['HTTPS'] = 'on';
 $_SERVER['SERVER_PORT'] = '443';
 
-if (empty(getenv('SESSION_DRIVER')) || empty($_ENV['SESSION_DRIVER'])) {
-    putenv('SESSION_DRIVER=cookie');
-    $_ENV['SESSION_DRIVER'] = 'cookie';
-    $_SERVER['SESSION_DRIVER'] = 'cookie';
-}
+putenv('SESSION_DRIVER=cookie');
+$_ENV['SESSION_DRIVER'] = 'cookie';
+$_SERVER['SESSION_DRIVER'] = 'cookie';
+
+putenv('SESSION_LIFETIME=120');
+$_ENV['SESSION_LIFETIME'] = '120';
+$_SERVER['SESSION_LIFETIME'] = '120';
+
+putenv('SESSION_COOKIE=karakopo_session');
+$_ENV['SESSION_COOKIE'] = 'karakopo_session';
+$_SERVER['SESSION_COOKIE'] = 'karakopo_session';
 
 if (empty(getenv('CACHE_STORE')) || empty($_ENV['CACHE_STORE'])) {
     putenv('CACHE_STORE=array');
@@ -148,20 +154,21 @@ $app->singleton(
 
 // Enforce non-empty runtime drivers during boot
 $app->booting(function () {
-    if (empty(config('session.driver'))) {
-        config(['session.driver' => 'cookie']);
-    }
+    config([
+        'session.driver' => 'cookie',
+        'session.lifetime' => 120,
+        'session.expire_on_close' => false,
+        'session.cookie' => 'karakopo_session',
+        'hashing.driver' => 'bcrypt',
+        'hashing.bcrypt.rounds' => 12,
+        'hashing.rehash_on_login' => false,
+    ]);
     if (empty(config('cache.default'))) {
         config(['cache.default' => 'array']);
     }
     if (empty(config('app.maintenance.driver'))) {
         config(['app.maintenance.driver' => 'array']);
     }
-    config([
-        'hashing.driver' => 'bcrypt',
-        'hashing.bcrypt.rounds' => 12,
-        'hashing.rehash_on_login' => false,
-    ]);
     if (empty(config('app.key'))) {
         config(['app.key' => 'base64:RbgQHxDfHYfmFuPJuat5kuulqHtJWDShMiirxVZKbKo=']);
     }
