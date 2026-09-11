@@ -185,4 +185,19 @@ class KarakopoFlowTest extends TestCase
         $this->assertEquals('Shipped', $order->order_status);
         $this->assertEquals('Paid', $order->payment_status);
     }
+
+    public function test_admin_can_login_when_bcrypt_rounds_is_unusual_or_serverless(): void
+    {
+        // Simulate weird serverless environment with empty or corrupted rounds
+        config(['hashing.bcrypt.rounds' => '']);
+        config(['hashing.rehash_on_login' => false]);
+
+        $response = $this->post('/login', [
+            'email' => 'admin@karakopo.com',
+            'password' => 'password',
+        ]);
+
+        $response->assertRedirect('/admin');
+        $this->assertAuthenticated();
+    }
 }

@@ -55,6 +55,10 @@ putenv('APP_SERVICES_CACHE=/tmp/storage/bootstrap/cache/services.php');
 $_ENV['APP_SERVICES_CACHE'] = '/tmp/storage/bootstrap/cache/services.php';
 $_SERVER['APP_SERVICES_CACHE'] = '/tmp/storage/bootstrap/cache/services.php';
 
+putenv('BCRYPT_ROUNDS=12');
+$_ENV['BCRYPT_ROUNDS'] = '12';
+$_SERVER['BCRYPT_ROUNDS'] = '12';
+
 // Safe default encryption key if not configured in Vercel environment
 if (empty(getenv('APP_KEY')) && empty($_ENV['APP_KEY'])) {
     $fallbackKey = 'base64:RbgQHxDfHYfmFuPJuat5kuulqHtJWDShMiirxVZKbKo=';
@@ -153,9 +157,11 @@ $app->booting(function () {
     if (empty(config('app.maintenance.driver'))) {
         config(['app.maintenance.driver' => 'array']);
     }
-    if (empty(config('hashing.driver'))) {
-        config(['hashing.driver' => 'bcrypt']);
-    }
+    config([
+        'hashing.driver' => 'bcrypt',
+        'hashing.bcrypt.rounds' => 12,
+        'hashing.rehash_on_login' => false,
+    ]);
     if (empty(config('app.key'))) {
         config(['app.key' => 'base64:RbgQHxDfHYfmFuPJuat5kuulqHtJWDShMiirxVZKbKo=']);
     }
