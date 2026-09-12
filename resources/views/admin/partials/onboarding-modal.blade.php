@@ -37,7 +37,7 @@
                     💬 4. WhatsApp Checkout
                 </button>
                 <button type="button" onclick="switchGuideTab('tab-developer')" id="btn-tab-developer" class="guide-tab-btn px-3 py-2 rounded-lg transition-all text-gray-600 hover:text-gray-900 hover:bg-white/60">
-                    🛠️ 5. Developer Support
+                    ❤️ 5. Your Son / Tech Support
                 </button>
             </div>
 
@@ -147,29 +147,31 @@
                     </div>
                 </div>
 
-                <!-- Tab 5: Developer Support -->
+                <!-- Tab 5: Developer Support for Mum -->
                 <div id="tab-developer" class="guide-content-panel hidden space-y-4">
-                    <div class="flex items-center space-x-2 text-maroon font-bold text-base">
-                        <span>🛠️</span>
-                        <h4>Dedicated Technical & Developer Support</h4>
+                    <div class="flex items-center space-x-2 text-brand-maroon font-bold text-base">
+                        <span>❤️</span>
+                        <h4>Direct Support from Your Son / Developer</h4>
                     </div>
-                    <p class="text-xs text-gray-600">If you experience any technical glitch, server questions, need custom features, or domain configuration:</p>
+                    <p class="text-xs text-gray-600">
+                        Mum, don't worry about any technical stress! I built this platform for you and I am always on standby to help with anything you need:
+                    </p>
                     
-                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-2xl p-5 shadow-md">
+                    <div class="bg-gradient-to-br from-[#520118] via-[#3B0011] to-gray-900 text-white rounded-2xl p-5 shadow-lg border border-white/10">
                         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                            <div>
-                                <span class="text-[10px] uppercase font-bold tracking-widest text-white/60">Lead Developer Support</span>
+                            <div class="space-y-1">
+                                <span class="text-[10px] uppercase font-bold tracking-widest text-brand-amber">Always on Call For You</span>
                                 <h4 class="text-xl font-black text-white mt-0.5">+234 703 229 3819</h4>
-                                <p class="text-xs text-white/75 mt-1">Available for emergency fixes, custom updates, and platform maintenance.</p>
+                                <p class="text-xs text-white/80">Call or chat me anytime for uploading products, changing prices, or fixing anything!</p>
                             </div>
                             <div class="flex flex-wrap gap-2">
-                                <a href="https://wa.me/2347032293819?text=Hello%20Developer,%20I%20am%20contacting%20you%20from%20the%20Karakopo%20Admin%20Dashboard%20regarding..." target="_blank" class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-xs font-bold rounded-xl shadow transition-colors">
-                                    💬 WhatsApp Developer
+                                <a href="https://wa.me/2347032293819?text=Hi%20son,%20I%20need%20help%20with%20something%20on%20Karakopo..." target="_blank" class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-xs font-bold rounded-xl shadow transition-colors">
+                                    💬 Chat with Me on WhatsApp
                                 </a>
                                 <a href="tel:+2347032293819" class="inline-flex items-center px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-xs font-bold rounded-xl shadow transition-colors">
-                                    📞 Call Line
+                                    📞 Call My Line
                                 </a>
-                                <button type="button" onclick="navigator.clipboard.writeText('+2347032293819'); window.showToast('Developer phone number copied!');" class="inline-flex items-center px-3 py-2 bg-white text-gray-900 hover:bg-gray-100 text-xs font-bold rounded-xl shadow transition-colors">
+                                <button type="button" onclick="navigator.clipboard.writeText('+2347032293819'); window.showToast('My phone number (+2347032293819) copied!');" class="inline-flex items-center px-3 py-2 bg-white text-gray-900 hover:bg-gray-100 text-xs font-bold rounded-xl shadow transition-colors">
                                     📋 Copy Number
                                 </button>
                             </div>
@@ -183,7 +185,7 @@
             <div class="bg-gray-50 border-t border-gray-200 px-5 py-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div class="text-xs text-gray-500 flex items-center">
                     <span class="mr-1">📞</span>
-                    Developer Support: <strong class="text-gray-900 ml-1">+234 703 229 3819</strong>
+                    Your Son / Developer: <strong class="text-gray-900 ml-1">+234 703 229 3819</strong>
                 </div>
                 <button type="button" onclick="closeOnboardingModal()" class="w-full sm:w-auto px-5 py-2 bg-maroon hover-bg-maroon text-white text-xs sm:text-sm font-bold rounded-xl shadow transition-colors">
                     Got it, Close Guide

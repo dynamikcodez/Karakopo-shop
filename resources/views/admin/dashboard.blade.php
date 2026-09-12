@@ -136,47 +136,79 @@
         </div>
     </div>
 
-    <!-- Developer & Technical Support Card -->
-    <div class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl shadow-sm border border-gray-700/50 p-6 sm:p-7 overflow-hidden relative">
-        <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-            <div class="space-y-2 max-w-xl">
+    <!-- Inventory Sync & Developer Support for Mum -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Informal, Loving Developer Support Card for Mum -->
+        <div class="lg:col-span-8 bg-gradient-to-br from-[#520118] via-[#3B0011] to-gray-900 text-white rounded-3xl shadow-xl border border-white/10 p-6 sm:p-8 overflow-hidden relative">
+            <div class="relative z-10 space-y-3">
                 <div class="flex items-center space-x-2">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-black uppercase tracking-wider bg-amber-400 text-maroon shadow-sm">
-                        🛠️ Developer & Technical Support
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand-amber text-brand-maroon shadow-sm">
+                        ❤️ Developer & Tech Support
                     </span>
-                    <span class="inline-flex items-center text-xs text-green-400 font-semibold">
+                    <span class="inline-flex items-center text-xs text-green-300 font-semibold">
                         <span class="w-2 h-2 rounded-full bg-green-400 mr-1.5 animate-pulse"></span>
-                        Available for assistance
+                        Always on standby for you, Mum!
                     </span>
                 </div>
-                <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">Need technical help, fixes, or custom features?</h3>
-                <p class="text-xs sm:text-sm text-gray-300">
-                    If you encounter any server issues, have questions about your Vercel deployment, or wish to add new payment methods or features, contact your software developer directly.
+                
+                <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+                    Hey Mum! Need anything added, changed, or fixed?
+                </h3>
+                
+                <p class="text-xs sm:text-sm text-white/85 leading-relaxed max-w-2xl">
+                    Don't worry about any technical stress. If you have new products to upload, want prices changed, need a new promotional banner, or notice anything unusual with customer orders, just reach out to me directly and I'll handle it immediately.
                 </p>
-                <div class="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-gray-400">
-                    <div>📞 Phone: <strong class="text-white">+234 703 229 3819</strong></div>
-                    <div>🏦 Store Bank: <strong class="text-white">OPay (8135631609)</strong></div>
-                    <div>💬 Store Line: <strong class="text-white">+234 812 621 5642</strong></div>
+
+                <div class="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-white/70 border-t border-white/10">
+                    <div>📞 My Direct Phone: <strong class="text-white">+234 703 229 3819</strong></div>
+                    <div>🏦 Your Store OPay: <strong class="text-white">8135631609 (Karakopo Retail)</strong></div>
+                    <div>💬 Store WhatsApp: <strong class="text-white">+234 812 621 5642</strong></div>
+                </div>
+
+                <div class="pt-3 flex flex-wrap items-center gap-2.5">
+                    <a href="https://wa.me/2347032293819?text=Hi%20son,%20I%20need%20a%20hand%20with%20the%20Karakopo%20website..." target="_blank" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/25 transition-all">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                        Chat with Me on WhatsApp
+                    </a>
+                    <a href="tel:+2347032293819" class="inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white/15 hover:bg-white/25 text-white border border-white/20 transition-all">
+                        <svg class="w-4 h-4 mr-2 text-brand-amber" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        Call My Line
+                    </a>
+                    <button type="button" onclick="navigator.clipboard.writeText('+2347032293819'); window.showToast('My phone number (+2347032293819) copied!');" class="inline-flex items-center justify-center px-3.5 py-2.5 rounded-xl text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-colors">
+                        📋 Copy My Number
+                    </button>
                 </div>
             </div>
+            
+            <!-- Soft brand accent circle in background -->
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-rose/20 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
 
-            <div class="flex flex-col sm:flex-row lg:flex-col gap-2.5 w-full sm:w-auto flex-shrink-0">
-                <a href="https://wa.me/2347032293819?text=Hello%20Developer,%20I%20am%20contacting%20you%20from%20the%20Karakopo%20Admin%20Dashboard%20regarding..." target="_blank" class="inline-flex items-center justify-center px-5 py-3 rounded-xl text-xs sm:text-sm font-bold bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20 transition-all">
-                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                    Chat on WhatsApp
+        <!-- Inventory Sync & Data Backup Card -->
+        <div class="lg:col-span-4 bg-white rounded-3xl p-6 sm:p-7 shadow-sm border border-brand-creamBorder flex flex-col justify-between space-y-4">
+            <div>
+                <div class="flex items-center space-x-2 text-xs font-black uppercase text-brand-maroon tracking-wider mb-2">
+                    <span>📦</span>
+                    <span>Inventory & Data Sync</span>
+                </div>
+                <h4 class="font-bold text-gray-900 text-sm">Download Live Database</h4>
+                <p class="text-xs text-gray-500 mt-1 leading-relaxed">
+                    Download a full backup of all current products, categories, and orders. Keep this to sync inventory between your online Vercel store and your local developer machine.
+                </p>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-gray-100">
+                <a href="{{ route('admin.database.download') }}" class="w-full inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-cream hover:bg-gray-100 text-brand-maroon border border-brand-creamBorder transition-colors shadow-sm">
+                    <svg class="w-4 h-4 mr-2 text-brand-maroon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Download Database (.sqlite)
                 </a>
-                <a href="tel:+2347032293819" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all">
-                    <svg class="w-4 h-4 mr-2 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                    Direct Phone Call
-                </a>
-                <button type="button" onclick="navigator.clipboard.writeText('+2347032293819'); window.showToast('Developer number (+2347032293819) copied!');" class="inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:text-white hover:bg-white/5 transition-colors">
-                    📋 Copy Developer Number
-                </button>
+                <div class="text-[10px] text-center text-gray-400">
+                    Safe one-click export containing all catalog items
+                </div>
             </div>
         </div>
 
-        <!-- Decorative background glow -->
-        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-maroon/30 rounded-full blur-3xl pointer-events-none"></div>
     </div>
 </div>
 @endsection

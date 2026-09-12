@@ -28,6 +28,27 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middl
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
+// Dynamic SEO XML Sitemap
+Route::get('/sitemap.xml', function () {
+    $categories = \App\Models\Category::where('is_published', true)->get();
+    $products = \App\Models\Product::where('is_published', true)->get();
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    $xml .= '<url><loc>' . url('/') . '</loc><changefreq>daily</changefreq><priority>1.0</priority></url>';
+    $xml .= '<url><loc>' . url('/shop') . '</loc><changefreq>daily</changefreq><priority>0.9</priority></url>';
+
+    foreach ($categories as $cat) {
+        $xml .= '<url><loc>' . route('shop', ['category' => $cat->slug]) . '</loc><lastmod>' . ($cat->updated_at ? $cat->updated_at->format('Y-m-d') : date('Y-m-d')) . '</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>';
+    }
+    foreach ($products as $prod) {
+        $xml .= '<url><loc>' . route('product.show', $prod->slug) . '</loc><lastmod>' . ($prod->updated_at ? $prod->updated_at->format('Y-m-d') : date('Y-m-d')) . '</lastmod><changefreq>weekly</changefreq><priority>0.85</priority></url>';
+    }
+    $xml .= '</urlset>';
+
+    return response($xml, 200, ['Content-Type' => 'application/xml']);
+})->name('sitemap');
+
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', CategoryController::class);
@@ -35,5 +56,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
     Route::patch('orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.status');
+    Route::get('database/download', function () {
+        $path = config('database.connections.sqlite.database');
+        if (file_exists($path)) {
+            return response()->download($path, 'karakopo-inventory-' . date('Y-m-d-His') . '.sqlite');
+        }
+        abort(404, 'Database file not found');
+    })->name('database.download');
 });
-

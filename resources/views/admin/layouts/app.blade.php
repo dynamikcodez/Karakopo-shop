@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>@yield('title', 'Admin') | Karakopo Control Panel</title>
+    <title>@yield('title', 'Admin Dashboard') | Karakopo Merchant OS</title>
+    
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <meta name="theme-color" content="#520118">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .bg-maroon { background-color: #5B1032; }
-        .text-maroon { color: #5B1032; }
-        .border-maroon { border-color: #5B1032; }
-        .hover-bg-maroon:hover { background-color: #7a1543; }
-        .bg-cream { background-color: #FFF6E9; }
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Outfit', sans-serif; }
+        .bg-maroon { background-color: #520118; }
+        .text-maroon { color: #520118; }
+        .border-maroon { border-color: #520118; }
+        .hover-bg-maroon:hover { background-color: #3B0011; }
+        .bg-cream { background-color: #FAF7F2; }
+        .text-brand-rose { color: #C8024D; }
+        .bg-brand-rose { background-color: #C8024D; }
+        .text-brand-green { color: #1E6115; }
+        .bg-brand-green { background-color: #1E6115; }
+        .text-brand-amber { color: #FE9A02; }
     </style>
 </head>
 <body class="bg-[#F8F9FA] text-gray-800 antialiased flex flex-col min-h-screen">
@@ -21,7 +35,7 @@
         <!-- Mobile Header Bar -->
         <div class="md:hidden bg-maroon text-white px-4 py-3 flex items-center justify-between shadow sticky top-0 z-40">
             <div class="flex items-center space-x-2">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-8 w-auto bg-white rounded-full p-0.5">
+                <img src="{{ asset('images/logo-icon.png') }}" alt="Logo" class="h-8 w-auto bg-white rounded-full p-0.5">
                 <span class="font-extrabold text-lg tracking-tight">Karakopo <span class="text-xs font-normal opacity-80 uppercase bg-white/20 px-1.5 py-0.5 rounded">Admin</span></span>
             </div>
             <div class="flex items-center space-x-2">
@@ -42,7 +56,7 @@
             <!-- Brand Logo -->
             <div class="p-6 border-b border-white/10 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-9 w-auto bg-white rounded-full p-1 shadow">
+                    <img src="{{ asset('images/logo-icon.png') }}" alt="Logo" class="h-9 w-auto bg-white rounded-full p-1 shadow">
                     <div>
                         <h1 class="text-xl font-black tracking-tight leading-none">Karakopo</h1>
                         <span class="text-[10px] uppercase font-bold tracking-widest text-white/70">Merchant OS</span>

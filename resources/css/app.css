@@ -4,6 +4,65 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Outfit', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    
+    /* Authentic Karakopo Brand Identity Colors */
+    --color-maroon: #520118;
+    --color-maroon-dark: #3b0011;
+    --color-maroon-light: #700c25;
+    --color-rose: #c8024d;
+    --color-rose-hover: #ab0242;
+    --color-amber: #fe9a02;
+    --color-amber-dark: #e08200;
+    --color-green: #1e6115;
+    --color-green-dark: #154c10;
+    --color-green-light: #28841c;
+    --color-cream: #faf7f2;
+    --color-cream-soft: #fdfbf7;
+    --color-cream-border: #f0e8df;
+}
+
+:root {
+    --brand-maroon: #520118;
+    --brand-maroon-dark: #3b0011;
+    --brand-maroon-light: #700c25;
+    --brand-rose: #c8024d;
+    --brand-amber: #fe9a02;
+    --brand-green: #1e6115;
+    --brand-green-light: #28841c;
+    --brand-cream: #faf7f2;
+    --brand-cream-soft: #fdfbf7;
+    --brand-cream-border: #f0e8df;
+}
+
+/* Reusable brand color utility classes */
+.bg-cream { background-color: #faf7f2; }
+.bg-cream-soft { background-color: #fdfbf7; }
+.text-maroon { color: #520118; }
+.bg-maroon { background-color: #520118; }
+.border-maroon { border-color: #520118; }
+.hover-bg-maroon:hover { background-color: #3b0011; }
+
+.text-brand-rose { color: #c8024d; }
+.bg-brand-rose { background-color: #c8024d; }
+.border-brand-rose { border-color: #c8024d; }
+.hover-bg-brand-rose:hover { background-color: #ab0242; }
+
+.text-brand-amber { color: #fe9a02; }
+.bg-brand-amber { background-color: #fe9a02; }
+
+.text-brand-green { color: #1e6115; }
+.bg-brand-green { background-color: #1e6115; }
+.border-brand-green { border-color: #1e6115; }
+.hover-bg-brand-green:hover { background-color: #154c10; }
+
+.border-cream { border-color: #f0e8df; }
+
+/* Subtle card elevation with brand tint */
+.shadow-brand {
+    box-shadow: 0 4px 20px -2px rgba(82, 1, 24, 0.06), 0 2px 6px -1px rgba(82, 1, 24, 0.04);
+}
+.shadow-brand-hover:hover {
+    box-shadow: 0 12px 28px -4px rgba(82, 1, 24, 0.12), 0 4px 10px -2px rgba(82, 1, 24, 0.06);
 }

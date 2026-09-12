@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /login
+Disallow: /cart
+Disallow: /checkout
+
+Sitemap: https://karakopo-shop.vercel.app/sitemap.xml
