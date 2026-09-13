@@ -30,31 +30,31 @@ class DatabaseSeeder extends Seeder
             'kitchen-essentials' => [
                 'name' => 'Kitchen Essentials',
                 'description' => 'Premium cookware, tools, and durable food storage for modern culinary spaces.',
-                'image' => 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1000&auto=format&fit=crop',
+                'image' => 'images/categories/kitchen-essentials.jpg',
                 'is_published' => true,
             ],
             'home-decor' => [
                 'name' => 'Home Decor & Living',
                 'description' => 'Aesthetic accents, artisanal vessels, and statement pieces to elevate every room.',
-                'image' => 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1000&auto=format&fit=crop',
+                'image' => 'images/categories/home-decor.jpg',
                 'is_published' => true,
             ],
             'tableware-dining' => [
                 'name' => 'Tableware & Dining',
                 'description' => 'Handcrafted stoneware, drinkware sets, and cutlery designed for memorable hosting.',
-                'image' => 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=1000&auto=format&fit=crop',
+                'image' => 'images/categories/tableware-dining.jpg',
                 'is_published' => true,
             ],
             'gifts-souvenirs' => [
                 'name' => 'Gifts & Souvenirs',
                 'description' => 'Thoughtfully packaged souvenir sets, scented candles, and curated gift hampers.',
-                'image' => 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000&auto=format&fit=crop',
+                'image' => 'images/categories/gifts-souvenirs.jpg',
                 'is_published' => true,
             ],
             'bathroom-organization' => [
                 'name' => 'Bathroom & Organization',
                 'description' => 'Plush bamboo towels, woven storage solutions, and spa-grade organization accessories.',
-                'image' => 'https://images.unsplash.com/photo-1616627547584-bf28cee262db?q=80&w=1000&auto=format&fit=crop',
+                'image' => 'images/categories/bathroom-organization.jpg',
                 'is_published' => true,
             ],
         ];
@@ -82,8 +82,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => true,
                 'images' => [
-                    'https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=1000&auto=format&fit=crop',
-                    'products/premium_plates.png',
+                    'images/products/ceramic-dining-plates.jpg',
+                    'images/products/ceramic-dining-plates-dining.jpg',
                 ],
             ],
             [
@@ -99,8 +99,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => true,
                 'images' => [
-                    'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=1000&auto=format&fit=crop',
-                    'products/bamboo_board.png',
+                    'images/products/bamboo-cutting-board.jpg',
+                    'images/products/bamboo-cutting-board-prep.jpg',
                 ],
             ],
             [
@@ -116,7 +116,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => true,
                 'images' => [
-                    'https://images.unsplash.com/photo-1512149177596-f817c7ef5d4c?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/doughnut-ceramic-vase.jpg',
+                    'images/products/doughnut-ceramic-vase-detail.jpg',
                 ],
             ],
             [
@@ -132,7 +133,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => true,
                 'images' => [
-                    'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/rattan-storage-basket.jpg',
+                    'images/products/rattan-storage-basket-detail.jpg',
                 ],
             ],
             [
@@ -148,7 +150,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => true,
                 'images' => [
-                    'https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/stainless-thermal-flask.jpg',
+                    'images/products/stainless-thermal-flask-detail.jpg',
                 ],
             ],
             [
@@ -164,7 +167,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => true,
                 'images' => [
-                    'https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/amber-scented-candle.jpg',
+                    'images/products/amber-scented-candle-detail.jpg',
                 ],
             ],
             [
@@ -180,7 +184,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => true,
                 'images' => [
-                    'https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/glass-spice-jars.jpg',
+                    'images/products/glass-spice-jars-detail.jpg',
                 ],
             ],
             [
@@ -196,7 +201,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => true,
                 'images' => [
-                    'https://images.unsplash.com/photo-1577741314755-048d8525d31e?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/crystal-cut-tumblers.jpg',
+                    'images/products/crystal-cut-tumblers-detail.jpg',
                 ],
             ],
             [
@@ -212,7 +218,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => false,
                 'images' => [
-                    'https://images.unsplash.com/photo-1616627547584-bf28cee262db?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/bamboo-bath-towels.jpg',
+                    'images/products/bamboo-bath-towels-detail.jpg',
                 ],
             ],
             [
@@ -228,7 +235,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => false,
                 'images' => [
-                    'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/matte-black-cutlery.jpg',
+                    'images/products/matte-black-cutlery-detail.jpg',
                 ],
             ],
             [
@@ -244,7 +252,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => false,
                 'images' => [
-                    'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/luxury-gift-hamper.jpg',
+                    'images/products/luxury-gift-hamper-detail.jpg',
                 ],
             ],
             [
@@ -260,7 +269,8 @@ class DatabaseSeeder extends Seeder
                 'is_published' => true,
                 'is_featured' => false,
                 'images' => [
-                    'https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?q=80&w=1000&auto=format&fit=crop',
+                    'images/products/gravity-salt-pepper-grinder.jpg',
+                    'images/products/gravity-salt-pepper-grinder-detail.jpg',
                 ],
             ],
         ];

@@ -27,6 +27,10 @@ class Category extends Model
             return $this->image;
         }
 
+        if (str_starts_with($this->image, '/images/') || str_starts_with($this->image, 'images/')) {
+            return asset(ltrim($this->image, '/'));
+        }
+
         if (str_starts_with($this->image, '/storage/') || str_starts_with($this->image, 'storage/')) {
             return asset(ltrim($this->image, '/'));
         }

@@ -27,6 +27,10 @@ class ProductImage extends Model
             return $this->image_path;
         }
 
+        if (str_starts_with($this->image_path, '/images/') || str_starts_with($this->image_path, 'images/')) {
+            return asset(ltrim($this->image_path, '/'));
+        }
+
         if (str_starts_with($this->image_path, '/storage/') || str_starts_with($this->image_path, 'storage/')) {
             return asset(ltrim($this->image_path, '/'));
         }
